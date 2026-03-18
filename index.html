@@ -49,6 +49,7 @@
 
     <h2>Become a Referral Partner</h2>
 
+    <!-- FORM -->
     <form id="referralForm">
 
       <input type="text" id="name" placeholder="Full Name" required>
@@ -56,31 +57,39 @@
       <input type="email" id="email" placeholder="Email Address" required>
 
       <div class="terms-box">
-  <ul>
-    <li>Refer genuine clients</li>
-    <li>Fintonic handles processing</li>
-    <li>Commission after disbursement</li>
-    <li>Approval depends on eligibility</li>
-  </ul>
-</div>
+        <ul>
+          <li>Refer genuine clients</li>
+          <li>Fintonic handles processing</li>
+          <li>Commission after disbursement</li>
+          <li>Approval depends on eligibility</li>
+        </ul>
+      </div>
 
-<label class="checkbox">
-  <input type="checkbox" id="agree" required>
-  <span>I confirm details are accurate</span>
-</label>
+      <label class="checkbox">
+        <input type="checkbox" id="agree" required>
+        <span>I confirm details are accurate</span>
+      </label>
 
-      <button type="submit">Submit</button>
+      <!-- ✅ UPDATED BUTTON WITH LOADER -->
+      <button type="submit" id="submitBtn">
+        <span id="btnText">Submit</span>
+        <span id="loader" class="loader"></span>
+      </button>
 
     </form>
-<div id="successBox" class="success-box">
-  <div class="success-icon">✔</div>
-  <h3 id="successTitle">You're Registered!</h3>
-  <p id="successMsg"></p>
-</div>
 
-<div id="errorBox" class="error-box">
-  <p id="errorMsg"></p>
-</div>
+    <!-- SUCCESS -->
+    <div id="successBox" class="success-box">
+      <div class="success-icon">✔</div>
+      <h3 id="successTitle">You're Registered!</h3>
+      <p id="successMsg"></p>
+    </div>
+
+    <!-- ERROR -->
+    <div id="errorBox" class="error-box">
+      <p id="errorMsg"></p>
+    </div>
+
   </div>
 </div>
 
