@@ -46,12 +46,43 @@ document.getElementById("referralForm").addEventListener("submit", function(e){
   })
   .then(res => res.json())
   .then(res => {
-    if(res.status === "duplicate"){
-      alert("Email already registered!");
-    } else {
-      alert("Success! Check your email for referral code.");
-      closeForm();
-    }
-  })
-  .catch(() => alert("Error submitting form"));
-});
+
+  // reset loader
+  btn.disabled = false;
+  btnText.style.display = "inline";
+  loader.style.display = "none";
+
+  const errorBox = document.getElementById("errorBox");
+  const successBox = document.getElementById("successBox");
+
+  errorBox.style.display = "none";
+
+  if(res.status === "duplicate"){
+    document.getElementById("errorMsg").innerText = "This email is already registered.";
+    errorBox.style.display = "block";
+    return;
+  }
+
+  // 🔥 SUCCESS FLOW
+  const name = document.getElementById("name").value;
+
+  document.getElementById("referralForm").style.display = "none";
+  successBox.style.display = "block";
+
+  document.getElementById("successMsg").innerText =
+    `Nice to have you, ${name}! Your referral code has been sent to your email.`;
+
+  // 🔥 AUTO CLOSE AFTER 3 SEC
+  setTimeout(() => {
+    function closeForm() {
+  document.querySelector(".popup").classList.remove("active");
+
+  document.getElementById("referralForm").style.display = "block";
+  document.getElementById("successBox").style.display = "none";
+  document.getElementById("errorBox").style.display = "none";
+
+  document.getElementById("referralForm").reset();
+};
+  }, 3000);
+
+})
