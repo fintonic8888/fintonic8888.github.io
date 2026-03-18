@@ -116,6 +116,17 @@ button {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  h2 {
+  margin-bottom: 10px;
+}
+
+input {
+  margin-top: 6px;
+}
+
+button {
+  margin-top: 16px;
+}
 }
 
 /* INPUT FIX */
