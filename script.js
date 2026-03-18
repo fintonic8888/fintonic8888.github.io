@@ -91,7 +91,7 @@ document.getElementById("referralForm").addEventListener("submit", function(e){
     // 🔥 AUTO CLOSE AFTER 3 SEC
     setTimeout(() => {
       closeForm();
-    }, 3000);
+    }, 5000);
 
   })
   .catch(() => {
