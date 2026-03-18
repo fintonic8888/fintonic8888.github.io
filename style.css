@@ -104,7 +104,6 @@ button {
 /* POPUP CONTENT */
 
 .popup-content {
-  position: relative;
   background: #fff;
   width: 100%;
   max-width: 420px;
@@ -116,9 +115,23 @@ button {
 
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+
+  position: relative;
 }
 
+/* Proper spacing */
+.popup-content h2 {
+  margin-bottom: 10px;
+}
+
+.popup-content input {
+  margin-top: 4px;
+}
+
+.popup-content button {
+  margin-top: 12px;
+}
 /* CLOSE BUTTON */
 
 .close {
@@ -142,16 +155,22 @@ button {
 input {
   width: 100%;
   padding: 14px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
   font-size: 14px;
   background: #f9fafb;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+  background: #fff;
 }
 
 /* TERMS */
 
 .terms-box {
-  background: #f8fafc;
+  background: #f1f5f9;
   padding: 14px;
   border-radius: 12px;
   font-size: 14px;
@@ -159,23 +178,23 @@ input {
 }
 
 .terms-box ul {
-  padding-left: 18px;
   margin: 0;
+  padding-left: 18px;
 }
 
 /* CHECKBOX */
 
 .checkbox {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   margin-top: 10px;
   font-size: 14px;
 }
 
 .checkbox input {
+  margin-top: 3px;
   width: auto;
-  margin: 0;
 }
 
 /* LOADER */
