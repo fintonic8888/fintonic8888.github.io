@@ -1,22 +1,11 @@
+// THEME TOGGLE
 const toggle = document.getElementById("themeToggle");
 
 toggle.onclick = function () {
-
-  if(document.body.classList.contains("dark")){
-    document.body.classList.remove("dark");
-    document.body.classList.add("light");
-    toggle.textContent = "🌙";
-  } else {
-    document.body.classList.remove("light");
-    document.body.classList.add("dark");
-    toggle.textContent = "☀️";
-  }
-
+  document.body.classList.toggle("dark");
 };
 
-function scrollToForm(){
-  document.getElementById("leadForm").scrollIntoView({ behavior: "smooth" });
-}
+// POPUP
 function openForm(){
   document.getElementById("popupForm").classList.add("active");
 }
@@ -24,9 +13,45 @@ function openForm(){
 function closeForm(){
   document.getElementById("popupForm").classList.remove("active");
 }
-window.onclick = function(event) {
+
+// CLOSE ON OUTSIDE CLICK
+window.onclick = function(e){
   const popup = document.getElementById("popupForm");
-  if (event.target === popup) {
+  if(e.target === popup){
     popup.classList.remove("active");
   }
-}
+};
+
+// FORM SUBMIT
+
+document.getElementById("referralForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const agree = document.getElementById("agree").checked;
+
+  if(!agree){
+    alert("Please accept the terms.");
+    return;
+  }
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbxaxhcLJ7TasZG-u08U7VFfTuXOiF_y-wwUJXfnwJ6md3P6JCnjoRGA5TJVj1pPsZi8Dw/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === "duplicate"){
+      alert("Email already registered!");
+    } else {
+      alert("Success! Check your email for referral code.");
+      closeForm();
+    }
+  })
+  .catch(() => alert("Error submitting form"));
+});
