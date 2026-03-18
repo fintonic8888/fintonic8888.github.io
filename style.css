@@ -73,7 +73,7 @@ button {
 /* POPUP FIXED */
 
 .popup {
-  display: none;
+  display: none; /* hidden by default */
   position: fixed;
   top: 0;
   left: 0;
@@ -81,20 +81,17 @@ button {
   height: 100%;
   background: rgba(0,0,0,0.6);
 
-  /* ✅ enable scroll */
-  overflow-y: auto;
-
-  /* ✅ center properly */
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   padding: 20px;
   z-index: 999;
-  opacity: 0;
-  transition: 0.3s;
 }
 
+/* WHEN ACTIVE */
+.popup.active {
+  display: flex;
+}
 .popup.active {
   display: flex;
   opacity: 1;
@@ -106,20 +103,12 @@ button {
   background: white;
   width: 100%;
   max-width: 420px;
-
-  /* ✅ responsive height */
   max-height: 90vh;
-
-  /* ✅ scroll inside form */
   overflow-y: auto;
 
   padding: 20px;
   border-radius: 12px;
-
-  transform: scale(0.9);
-  transition: 0.3s;
 }
-
 .popup.active .popup-content {
   transform: scale(1);
 }
