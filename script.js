@@ -12,13 +12,20 @@ function openForm(){
 
 function closeForm(){
   document.getElementById("popupForm").classList.remove("active");
+
+  // reset UI
+  document.getElementById("referralForm").style.display = "block";
+  document.getElementById("successBox").style.display = "none";
+  document.getElementById("errorBox").style.display = "none";
+
+  document.getElementById("referralForm").reset();
 }
 
 // CLOSE ON OUTSIDE CLICK
 window.onclick = function(e){
   const popup = document.getElementById("popupForm");
   if(e.target === popup){
-    popup.classList.remove("active");
+    closeForm();
   }
 };
 
@@ -27,12 +34,21 @@ window.onclick = function(e){
 document.getElementById("referralForm").addEventListener("submit", function(e){
   e.preventDefault();
 
+  const btn = document.getElementById("submitBtn");
+  const btnText = document.getElementById("btnText");
+  const loader = document.getElementById("loader");
+
   const agree = document.getElementById("agree").checked;
 
   if(!agree){
     alert("Please accept the terms.");
     return;
   }
+
+  // 🔥 START LOADER
+  btn.disabled = true;
+  btnText.style.display = "none";
+  loader.style.display = "inline-block";
 
   const data = {
     name: document.getElementById("name").value,
@@ -47,42 +63,46 @@ document.getElementById("referralForm").addEventListener("submit", function(e){
   .then(res => res.json())
   .then(res => {
 
-  // reset loader
-  btn.disabled = false;
-  btnText.style.display = "inline";
-  loader.style.display = "none";
+    // 🔥 STOP LOADER
+    btn.disabled = false;
+    btnText.style.display = "inline";
+    loader.style.display = "none";
 
-  const errorBox = document.getElementById("errorBox");
-  const successBox = document.getElementById("successBox");
+    const errorBox = document.getElementById("errorBox");
+    const successBox = document.getElementById("successBox");
 
-  errorBox.style.display = "none";
+    errorBox.style.display = "none";
 
-  if(res.status === "duplicate"){
-    document.getElementById("errorMsg").innerText = "This email is already registered.";
-    errorBox.style.display = "block";
-    return;
-  }
+    if(res.status === "duplicate"){
+      document.getElementById("errorMsg").innerText = "This email is already registered.";
+      errorBox.style.display = "block";
+      return;
+    }
 
-  // 🔥 SUCCESS FLOW
-  const name = document.getElementById("name").value;
+    // 🔥 SUCCESS FLOW
+    const name = document.getElementById("name").value;
 
-  document.getElementById("referralForm").style.display = "none";
-  successBox.style.display = "block";
+    document.getElementById("referralForm").style.display = "none";
+    successBox.style.display = "block";
 
-  document.getElementById("successMsg").innerText =
-    `Nice to have you, ${name}! Your referral code has been sent to your email.`;
+    document.getElementById("successMsg").innerText =
+      `Nice to have you, ${name}! Your referral code has been sent to your email.`;
 
-  // 🔥 AUTO CLOSE AFTER 3 SEC
-  setTimeout(() => {
-    function closeForm() {
-  document.querySelector(".popup").classList.remove("active");
+    // 🔥 AUTO CLOSE AFTER 3 SEC
+    setTimeout(() => {
+      closeForm();
+    }, 3000);
 
-  document.getElementById("referralForm").style.display = "block";
-  document.getElementById("successBox").style.display = "none";
-  document.getElementById("errorBox").style.display = "none";
+  })
+  .catch(() => {
 
-  document.getElementById("referralForm").reset();
-};
-  }, 3000);
+    // 🔥 STOP LOADER ON ERROR
+    btn.disabled = false;
+    btnText.style.display = "inline";
+    loader.style.display = "none";
 
-})
+    document.getElementById("errorMsg").innerText = "Something went wrong. Please try again.";
+    document.getElementById("errorBox").style.display = "block";
+
+  });
+});
