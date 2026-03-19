@@ -9,15 +9,32 @@
 
 <body>
 
-<header>
+<!-- NAVBAR -->
+<header class="navbar">
   <img src="logo.png" class="logo">
+  <button id="openBtn" class="nav-btn">Refer & Earn</button>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <h2>Get the Right Loan, Faster</h2>
+  <h1>Get the Right Loan, Faster</h1>
   <p>Apply, refer & earn, or partner with us — all in one place.</p>
 
-  <button id="openBtn">Refer & Earn</button>
+  <div class="hero-actions">
+    <button id="openBtn2" class="primary-btn">Start Referring</button>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+
+  <div class="grid">
+    <div class="card">💳 Personal Loan</div>
+    <div class="card">🏢 Business Loan</div>
+    <div class="card">🏠 Home Loan</div>
+    <div class="card">📈 Loan Against Property</div>
+  </div>
 </section>
 
 <!-- POPUP -->
@@ -48,7 +65,7 @@
         <span>I confirm details are accurate</span>
       </label>
 
-      <button type="submit" id="submitBtn">
+      <button type="submit" id="submitBtn" class="primary-btn">
         <span id="btnText">Submit</span>
         <span id="loader" class="loader"></span>
       </button>
