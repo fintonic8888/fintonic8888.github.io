@@ -159,8 +159,12 @@ input:focus {
   line-height: 1.4;
 }
 
+/* 🔥 THIS IS THE FIX */
 .checkbox input {
-  margin-top: 4px;
+  width: auto;        /* prevents full width stretch */
+  margin: 0;
+  margin-top: 3px;    /* aligns with text */
+  flex-shrink: 0;     /* keeps checkbox size fixed */
 }
 
 /* SUBMIT BUTTON */
