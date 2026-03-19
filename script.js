@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 // THEME TOGGLE
 const toggle = document.getElementById("themeToggle");
 
@@ -115,3 +116,4 @@ if(btn && btnText && loader){
 
   });
 });
+  });
