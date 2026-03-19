@@ -211,13 +211,16 @@ input:focus {
 .checkbox {
   display: flex;
   align-items: flex-start;
+  gap: 10px; /* spacing between checkbox and text */
   font-size: 14px;
   line-height: 1.4;
 }
 
 .checkbox input {
-  margin-top: 4px;
+  margin-top: 3px;
+  width: auto; /* prevent full width issue */
 }
+
 /* LOADER */
 
 .loader {
