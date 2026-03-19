@@ -21,8 +21,6 @@ const loader = document.getElementById("loader");
 openBtn.onclick = () => popup.classList.add("active");
 closeBtn.onclick = closeForm;
 
-document.getElementById("closeSuccess").onclick = closeForm;
-
 function closeForm(){
   popup.classList.remove("active");
   form.style.display = "block";
