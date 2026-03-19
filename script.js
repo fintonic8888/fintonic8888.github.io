@@ -34,9 +34,16 @@ window.onclick = function(e){
 document.getElementById("referralForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const btn = document.getElementById("submitBtn");
-  const btnText = document.getElementById("btnText");
-  const loader = document.getElementById("loader");
+const btn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const loader = document.getElementById("loader");
+
+// fallback safety
+if(btn && btnText && loader){
+  btn.disabled = true;
+  btnText.style.display = "none";
+  loader.style.display = "inline-block";
+}
 
   const agree = document.getElementById("agree").checked;
 
@@ -64,9 +71,11 @@ document.getElementById("referralForm").addEventListener("submit", function(e){
   .then(res => {
 
     // 🔥 STOP LOADER
-    btn.disabled = false;
-    btnText.style.display = "inline";
-    loader.style.display = "none";
+    if(btn && btnText && loader){
+  btn.disabled = false;
+  btnText.style.display = "inline";
+  loader.style.display = "none";
+}
 
     const errorBox = document.getElementById("errorBox");
     const successBox = document.getElementById("successBox");
