@@ -7,11 +7,11 @@ toggle.onclick = function () {
 };
 
 // POPUP
-function openForm(){
+window.openForm = function(){
   document.getElementById("popupForm").classList.add("active");
 }
 
-function closeForm(){
+window.closeForm = function(){
   document.getElementById("popupForm").classList.remove("active");
 
   // reset UI
