@@ -210,15 +210,19 @@ input:focus {
 
 .checkbox {
   display: flex;
-  align-items: flex-start;
-  gap: 10px; /* spacing between checkbox and text */
+  align-items: center;   /* center vertically */
+  gap: 8px;              /* space between box and text */
   font-size: 14px;
   line-height: 1.4;
 }
 
-.checkbox input {
-  margin-top: 3px;
-  width: auto; /* prevent full width issue */
+/* VERY IMPORTANT FIX */
+.checkbox input[type="checkbox"] {
+  width: auto;     /* stop full width */
+  height: auto;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;  /* prevent stretching */
 }
 
 /* LOADER */
