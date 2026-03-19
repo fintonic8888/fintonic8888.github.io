@@ -106,10 +106,14 @@ button {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
+
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  padding: 16px;
+
+  z-index: 999;
+  padding: 20px;
+
+  overflow-y: auto; /* ✅ important */
 }
 
 .popup.active {
@@ -122,8 +126,6 @@ button {
   background: #fff;
   width: 100%;
   max-width: 420px;
-  max-height: 85vh;
-  overflow: hidden;
 
   padding: 28px;
   border-radius: 20px;
@@ -136,7 +138,9 @@ button {
 
   box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
-
+.popup-content form {
+  padding-bottom: 10px;
+}
 /* Proper spacing */
 .popup-content h2 {
   margin-bottom: 10px;
