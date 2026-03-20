@@ -41,11 +41,15 @@ form.addEventListener("submit", function(e){
   btnText.style.display = "none";
   loader.style.display = "inline";
 
-  const data = {
-    name: name.value,
-    phone: phone.value,
-    email: email.value
-  };
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const emailInput = document.getElementById("email");
+
+const data = {
+  name: nameInput ? nameInput.value.trim() : "",
+  phone: phoneInput ? phoneInput.value.trim() : "",
+  email: emailInput ? emailInput.value.trim() : ""
+};
 
   fetch("https://script.google.com/macros/s/AKfycbxaxhcLJ7TasZG-u08U7VFfTuXOiF_y-wwUJXfnwJ6md3P6JCnjoRGA5TJVj1pPsZi8Dw/exec", {
     method: "POST",
