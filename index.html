@@ -4,32 +4,147 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fintonic</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#020617;color:white}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+}
+.logo{height:40px}
+.nav-btn{
+  background:#22c55e;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:80px 20px;
+  background:radial-gradient(circle at top,#1e293b,#020617);
+}
+.hero h1{font-size:3rem}
+.hero p{margin-top:10px;color:#94a3b8}
+
+.primary-btn{
+  margin-top:20px;
+  padding:12px 20px;
+  background:#22c55e;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* SERVICES */
+.services{padding:40px;text-align:center}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+.card{
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#22c55e;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.popup.active{display:flex}
+
+.popup-content{
+  background:#111827;
+  padding:25px;
+  border-radius:15px;
+  width:90%;
+  max-width:420px;
+}
+
+.close{
+  float:right;
+  cursor:pointer;
+  font-size:20px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:none;
+}
+
+.checkbox{
+  font-size:.8rem;
+  display:flex;
+  gap:8px;
+  margin:10px 0;
+}
+
+.loader{
+  display:none;
+  width:16px;
+  height:16px;
+  border:2px solid white;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.success-box,.error-box{
+  display:none;
+  text-align:center;
+  margin-top:15px;
+}
+.success-icon{font-size:30px;color:#22c55e}
+
+</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header class="navbar">
   <img src="logo.png" class="logo">
   <button id="openBtn" class="nav-btn">Refer & Earn</button>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Get the Right Loan, Faster</h1>
-  <p>Apply, refer & earn, or partner with us — all in one place.</p>
-
-  <div class="hero-actions">
-    <button id="openBtn2" class="primary-btn">Start Referring</button>
-  </div>
+  <p>Apply, check eligibility, calculate EMI & earn rewards</p>
+  <button id="openBtn2" class="primary-btn">Start Referring</button>
 </section>
 
-<!-- SERVICES -->
 <section class="services">
   <h2>Our Services</h2>
-
   <div class="grid">
     <div class="card">💳 Personal Loan</div>
     <div class="card">🏢 Business Loan</div>
@@ -47,19 +162,9 @@
     <h2>Become a Referral Partner</h2>
 
     <form id="referralForm">
-
       <input type="text" id="name" placeholder="Full Name" required>
       <input type="tel" id="phone" placeholder="Mobile Number" required>
       <input type="email" id="email" placeholder="Email Address" required>
-
-      <div class="terms-box">
-        <ul>
-          <li>Refer genuine clients</li>
-          <li>Fintonic handles processing</li>
-          <li>Commission after disbursement</li>
-          <li>Approval depends on eligibility</li>
-        </ul>
-      </div>
 
       <label class="checkbox">
         <input type="checkbox" id="agree" required>
@@ -70,7 +175,6 @@
         <span id="btnText">Submit</span>
         <span id="loader" class="loader"></span>
       </button>
-
     </form>
 
     <div id="successBox" class="success-box">
@@ -87,6 +191,13 @@
 </div>
 
 <script src="script.js"></script>
+
+<script>
+// small fix: open second button also
+document.getElementById("openBtn2").onclick = function(){
+  document.getElementById("popupForm").classList.add("active");
+};
+</script>
 
 </body>
 </html>
