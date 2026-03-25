@@ -16,7 +16,8 @@ body{font-family:Poppins,sans-serif;background:#020617;color:white}
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 40px;
+  padding:15px 40px;
+  background:white;
 }
 .logo{height:40px}
 .nav-btn{
@@ -93,17 +94,22 @@ body{font-family:Poppins,sans-serif;background:#020617;color:white}
 
 input{
   width:100%;
-  padding:10px;
-  margin-bottom:10px;
+  padding:12px;
+  margin-bottom:12px;
   border-radius:8px;
   border:none;
 }
 
 .checkbox{
-  font-size:.8rem;
   display:flex;
+  align-items:center;
   gap:8px;
-  margin:10px 0;
+  font-size:.85rem;
+  margin:10px 0 15px;
+}
+
+.checkbox input{
+  width:auto;
 }
 
 .loader{
@@ -159,7 +165,7 @@ input{
 
     <span class="close" id="closeBtn">&times;</span>
 
-    <h2>Become a Referral Partner</h2>
+    <h2 style="margin-bottom:15px">Become a Referral Partner</h2>
 
     <form id="referralForm">
       <input type="text" id="name" placeholder="Full Name" required>
@@ -171,7 +177,7 @@ input{
         <span>I confirm details are accurate</span>
       </label>
 
-      <button type="submit" id="submitBtn" class="primary-btn">
+      <button type="submit" id="submitBtn" class="primary-btn" style="width:100%">
         <span id="btnText">Submit</span>
         <span id="loader" class="loader"></span>
       </button>
@@ -193,7 +199,6 @@ input{
 <script src="script.js"></script>
 
 <script>
-// small fix: open second button also
 document.getElementById("openBtn2").onclick = function(){
   document.getElementById("popupForm").classList.add("active");
 };
