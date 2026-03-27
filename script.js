@@ -86,3 +86,76 @@ const data = {
 });
 
 });
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+// OPEN BUTTON
+document.getElementById("openBtn3").onclick = function() {
+  document.getElementById("emiModal").style.display = "block";
+};
+
+// CLOSE BUTTON
+document.getElementById("closeEmi").onclick = function() {
+  document.getElementById("emiModal").style.display = "none";
+};
+
+// CLOSE ON OUTSIDE CLICK
+window.onclick = function(e) {
+  let modal = document.getElementById("emiModal");
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+// SLIDERS
+let loanSlider = document.getElementById("loanSlider");
+let rateSlider = document.getElementById("rateSlider");
+let tenureSlider = document.getElementById("tenureSlider");
+
+let loanValue = document.getElementById("loanValue");
+let rateValue = document.getElementById("rateValue");
+let tenureValue = document.getElementById("tenureValue");
+
+let emiResult = document.getElementById("emiResult");
+
+// CALCULATION
+function calculateEMI() {
+  let loan = loanSlider.value;
+  let rate = rateSlider.value / 12 / 100;
+  let tenure = tenureSlider.value * 12;
+
+  let emi = loan * rate * Math.pow(1+rate, tenure) / (Math.pow(1+rate, tenure) - 1);
+
+  emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
+}
+
+// LIVE UPDATE
+loanSlider.oninput = function() {
+  loanValue.innerText = "₹" + loanSlider.value;
+  calculateEMI();
+};
+
+rateSlider.oninput = function() {
+  rateValue.innerText = rateSlider.value + "%";
+  calculateEMI();
+};
+
+tenureSlider.oninput = function() {
+  tenureValue.innerText = tenureSlider.value + " years";
+  calculateEMI();
+};
+
+// DEFAULT VALUES
+loanSlider.value = 1000000;
+rateSlider.value = 10;
+tenureSlider.value = 20;
+
+loanValue.innerText = "₹" + loanSlider.value;
+rateValue.innerText = rateSlider.value + "%";
+tenureValue.innerText = tenureSlider.value + " years";
+
+calculateEMI();
+
+});
+</script>
