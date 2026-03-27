@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // ================= REFER FORM =================
-  const openBtn = document.getElementById("openBtn");
+  const openBtn = document.getElementById("openBtn2");
   const closeBtn = document.getElementById("closeBtn");
   const popup = document.getElementById("popupForm");
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnText = document.getElementById("btnText");
   const loader = document.getElementById("loader");
 
-  openBtn.onclick = () => popup.classList.add("active");
+  if(openBtn){   openBtn.onclick = () => popup.classList.add("active"); }
   closeBtn.onclick = closeForm;
 
   function closeForm(){
