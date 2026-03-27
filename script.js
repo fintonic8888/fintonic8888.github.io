@@ -101,7 +101,7 @@ document.getElementById("closeEmi").onclick = function() {
 };
 
 // CLOSE ON OUTSIDE CLICK
-window.onclick = function(e) {
+window.addEventListener("click", function(e) {
   let modal = document.getElementById("emiModal");
   if (e.target == modal) {
     modal.style.display = "none";
