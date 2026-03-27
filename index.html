@@ -151,6 +151,7 @@ input{
 }
 .success-icon{font-size:30px;color:#22c55e}
 
+/* EMI MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -171,12 +172,6 @@ input{
   border-radius: 12px;
 }
 
-.close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-}
-  
 </style>
 </head>
 
@@ -189,7 +184,11 @@ input{
 <section class="hero">
   <h1>Get the Right Loan, Faster</h1>
   <p>Apply, check eligibility, calculate EMI & earn rewards</p>
+
+  <!-- EMI BUTTON -->
   <button id="openBtn3" class="primary-btn"><strong>EMI Calculator</strong></button>
+
+  <!-- REFER BUTTON -->
   <button id="openBtn2" class="primary-btn"><strong>Refer & Earn</strong></button>
 </section>
 
@@ -203,7 +202,7 @@ input{
   </div>
 </section>
 
-<!-- POPUP -->
+<!-- REFER POPUP -->
 <div id="popupForm" class="popup">
   <div class="popup-content">
 
@@ -217,13 +216,13 @@ input{
       <input type="email" id="email" placeholder="Email Address" required>
 
       <div class="terms-box">
-  <ul>
-    <li>Refer genuine clients</li>
-    <li>Fintonic handles processing</li>
-    <li>Commission after disbursement</li>
-    <li>Approval depends on eligibility</li>
-  </ul>
-</div>
+        <ul>
+          <li>Refer genuine clients</li>
+          <li>Fintonic handles processing</li>
+          <li>Commission after disbursement</li>
+          <li>Approval depends on eligibility</li>
+        </ul>
+      </div>
 
       <label class="checkbox">
         <input type="checkbox" id="agree" required>
@@ -249,14 +248,7 @@ input{
   </div>
 </div>
 
-<script src="script.js"></script>
-
-<script>
-document.getElementById("openBtn2").onclick = function(){
-  document.getElementById("popupForm").classList.add("active");
-};
-</script>
-
+<!-- EMI MODAL -->
 <div id="emiModal" class="modal">
   <div class="modal-content">
     <span class="close" id="closeEmi">&times;</span>
@@ -278,6 +270,9 @@ document.getElementById("openBtn2").onclick = function(){
     <h3 id="emiResult">Monthly EMI: ₹0</h3>
   </div>
 </div>
-  
+
+<!-- MAIN SCRIPT -->
+<script src="script.js"></script>
+
 </body>
 </html>
