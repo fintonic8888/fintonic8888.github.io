@@ -102,6 +102,43 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // INPUT FIELDS
+let loanInput = document.getElementById("loanInput");
+let rateInput = document.getElementById("rateInput");
+let tenureInput = document.getElementById("tenureInput");
+
+// SYNC: slider → input
+loanSlider.oninput = function() {
+  loanInput.value = loanSlider.value;
+  calculateEMI();
+};
+
+rateSlider.oninput = function() {
+  rateInput.value = rateSlider.value;
+  calculateEMI();
+};
+
+tenureSlider.oninput = function() {
+  tenureInput.value = tenureSlider.value;
+  calculateEMI();
+};
+
+// SYNC: input → slider
+loanInput.oninput = function() {
+  loanSlider.value = loanInput.value;
+  calculateEMI();
+};
+
+rateInput.oninput = function() {
+  rateSlider.value = rateInput.value;
+  calculateEMI();
+};
+
+tenureInput.oninput = function() {
+  tenureSlider.value = tenureInput.value;
+  calculateEMI();
+};
+
     let loanSlider = document.getElementById("loanSlider");
     let rateSlider = document.getElementById("rateSlider");
     let tenureSlider = document.getElementById("tenureSlider");
@@ -113,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let emiResult = document.getElementById("emiResult");
 
     function calculateEMI() {
-      let loan = loanSlider.value;
+      let loan = loanInput.value; let rate = rateInput.value / 12 / 100; let tenure = tenureInput.value * 12;
       let rate = rateSlider.value / 12 / 100;
       let tenure = tenureSlider.value * 12;
 
