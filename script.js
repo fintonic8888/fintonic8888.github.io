@@ -150,14 +150,14 @@ tenureInput.oninput = function() {
     let emiResult = document.getElementById("emiResult");
 
     function calculateEMI() {
-      let loan = loanInput.value; let rate = rateInput.value / 12 / 100; let tenure = tenureInput.value * 12;
-      let rate = rateSlider.value / 12 / 100;
-      let tenure = tenureSlider.value * 12;
+  let loan = loanInput.value || loanSlider.value;
+  let rate = (rateInput.value || rateSlider.value) / 12 / 100;
+  let tenure = (tenureInput.value || tenureSlider.value) * 12;
 
-      let emi = loan * rate * Math.pow(1+rate, tenure) / (Math.pow(1+rate, tenure) - 1);
+  let emi = loan * rate * Math.pow(1+rate, tenure) / (Math.pow(1+rate, tenure) - 1);
 
-      emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
-    }
+  emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
+}
 
     loanSlider.oninput = function() {
       loanValue.innerText = "₹" + loanSlider.value;
