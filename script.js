@@ -105,7 +105,6 @@ function initEMI() {
     }
   });
 
-  // ELEMENTS
   const loanSlider = document.getElementById("loanSlider");
   const rateSlider = document.getElementById("rateSlider");
   const tenureSlider = document.getElementById("tenureSlider");
@@ -116,13 +115,10 @@ function initEMI() {
 
   const emiResult = document.getElementById("emiResult");
 
-  if (!loanSlider || !rateSlider || !tenureSlider) return;
-
-  // CALCULATION (single source of truth)
   function calculateEMI() {
-    const loan = Number(loanInput?.value || loanSlider.value);
-    const rate = Number(rateInput?.value || rateSlider.value) / 12 / 100;
-    const tenure = Number(tenureInput?.value || tenureSlider.value) * 12;
+    const loan = Number(loanInput.value);
+    const rate = Number(rateInput.value) / 12 / 100;
+    const tenure = Number(tenureInput.value) * 12;
 
     if (!loan || !rate || !tenure) return;
 
@@ -131,24 +127,21 @@ function initEMI() {
     emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
   }
 
-  // SYNC FUNCTION
   function sync(slider, input) {
-    if (!slider) return;
-
     slider.addEventListener("input", () => {
-      if (input) input.value = slider.value;
+      input.value = slider.value;
       calculateEMI();
     });
 
-    if (input) {
-      input.addEventListener("input", () => {
-        slider.value = input.value;
-        calculateEMI();
-      });
-    }
+    input.addEventListener("input", () => {
+      if (input.value < input.min) input.value = input.min;
+      if (input.value > input.max) input.value = input.max;
+
+      slider.value = input.value;
+      calculateEMI();
+    });
   }
 
-  // APPLY SYNC
   sync(loanSlider, loanInput);
   sync(rateSlider, rateInput);
   sync(tenureSlider, tenureInput);
@@ -158,14 +151,14 @@ function initEMI() {
   rateSlider.value = 10;
   tenureSlider.value = 20;
 
-  if (loanInput) loanInput.value = loanSlider.value;
-  if (rateInput) rateInput.value = rateSlider.value;
-  if (tenureInput) tenureInput.value = tenureSlider.value;
+  loanInput.value = loanSlider.value;
+  rateInput.value = rateSlider.value;
+  tenureInput.value = tenureSlider.value;
 
   calculateEMI();
 }
 
-// INIT
+// CALL inside DOMContentLoaded
 initEMI();
 
 });
