@@ -87,103 +87,83 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ================= EMI CALCULATOR =================
 
+function initEMI() {
+
   const openBtn3 = document.getElementById("openBtn3");
   const emiModal = document.getElementById("emiModal");
   const closeEmi = document.getElementById("closeEmi");
 
-  if (openBtn3 && emiModal && closeEmi) {
+  if (!openBtn3 || !emiModal || !closeEmi) return;
 
-    openBtn3.onclick = () => emiModal.style.display = "block";
-    closeEmi.onclick = () => emiModal.style.display = "none";
+  // OPEN / CLOSE
+  openBtn3.onclick = () => emiModal.style.display = "block";
+  closeEmi.onclick = () => emiModal.style.display = "none";
 
-    emiModal.addEventListener("click", function(e) {
-      if (e.target === emiModal) {
-        emiModal.style.display = "none";
-      }
-    });
+  emiModal.addEventListener("click", function(e) {
+    if (e.target === emiModal) {
+      emiModal.style.display = "none";
+    }
+  });
 
-    // INPUT FIELDS
-let loanInput = document.getElementById("loanInput");
-let rateInput = document.getElementById("rateInput");
-let tenureInput = document.getElementById("tenureInput");
+  // ELEMENTS
+  const loanSlider = document.getElementById("loanSlider");
+  const rateSlider = document.getElementById("rateSlider");
+  const tenureSlider = document.getElementById("tenureSlider");
 
-// SYNC: slider → input
-loanSlider.oninput = function() {
-  loanInput.value = loanSlider.value;
-  calculateEMI();
-};
+  const loanInput = document.getElementById("loanInput");
+  const rateInput = document.getElementById("rateInput");
+  const tenureInput = document.getElementById("tenureInput");
 
-rateSlider.oninput = function() {
-  rateInput.value = rateSlider.value;
-  calculateEMI();
-};
+  const emiResult = document.getElementById("emiResult");
 
-tenureSlider.oninput = function() {
-  tenureInput.value = tenureSlider.value;
-  calculateEMI();
-};
+  if (!loanSlider || !rateSlider || !tenureSlider) return;
 
-// SYNC: input → slider
-loanInput.oninput = function() {
-  loanSlider.value = loanInput.value;
-  calculateEMI();
-};
+  // CALCULATION (single source of truth)
+  function calculateEMI() {
+    const loan = Number(loanInput?.value || loanSlider.value);
+    const rate = Number(rateInput?.value || rateSlider.value) / 12 / 100;
+    const tenure = Number(tenureInput?.value || tenureSlider.value) * 12;
 
-rateInput.oninput = function() {
-  rateSlider.value = rateInput.value;
-  calculateEMI();
-};
+    if (!loan || !rate || !tenure) return;
 
-tenureInput.oninput = function() {
-  tenureSlider.value = tenureInput.value;
-  calculateEMI();
-};
+    const emi = loan * rate * Math.pow(1 + rate, tenure) / (Math.pow(1 + rate, tenure) - 1);
 
-    let loanSlider = document.getElementById("loanSlider");
-    let rateSlider = document.getElementById("rateSlider");
-    let tenureSlider = document.getElementById("tenureSlider");
-
-    let loanValue = document.getElementById("loanValue");
-    let rateValue = document.getElementById("rateValue");
-    let tenureValue = document.getElementById("tenureValue");
-
-    let emiResult = document.getElementById("emiResult");
-
-    function calculateEMI() {
-  let loan = loanInput.value || loanSlider.value;
-  let rate = (rateInput.value || rateSlider.value) / 12 / 100;
-  let tenure = (tenureInput.value || tenureSlider.value) * 12;
-
-  let emi = loan * rate * Math.pow(1+rate, tenure) / (Math.pow(1+rate, tenure) - 1);
-
-  emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
-}
-
-    loanSlider.oninput = function() {
-      loanValue.innerText = "₹" + loanSlider.value;
-      calculateEMI();
-    };
-
-    rateSlider.oninput = function() {
-      rateValue.innerText = rateSlider.value + "%";
-      calculateEMI();
-    };
-
-    tenureSlider.oninput = function() {
-      tenureValue.innerText = tenureSlider.value + " years";
-      calculateEMI();
-    };
-
-    // Default values
-    loanSlider.value = 1000000;
-    rateSlider.value = 10;
-    tenureSlider.value = 20;
-
-    loanValue.innerText = "₹" + loanSlider.value;
-    rateValue.innerText = rateSlider.value + "%";
-    tenureValue.innerText = tenureSlider.value + " years";
-
-    calculateEMI();
+    emiResult.innerText = "Monthly EMI: ₹" + Math.round(emi);
   }
 
-});
+  // SYNC FUNCTION
+  function sync(slider, input) {
+    if (!slider) return;
+
+    slider.addEventListener("input", () => {
+      if (input) input.value = slider.value;
+      calculateEMI();
+    });
+
+    if (input) {
+      input.addEventListener("input", () => {
+        slider.value = input.value;
+        calculateEMI();
+      });
+    }
+  }
+
+  // APPLY SYNC
+  sync(loanSlider, loanInput);
+  sync(rateSlider, rateInput);
+  sync(tenureSlider, tenureInput);
+
+  // DEFAULT VALUES
+  loanSlider.value = 1000000;
+  rateSlider.value = 10;
+  tenureSlider.value = 20;
+
+  if (loanInput) loanInput.value = loanSlider.value;
+  if (rateInput) rateInput.value = rateSlider.value;
+  if (tenureInput) tenureInput.value = tenureSlider.value;
+
+  calculateEMI();
+}
+
+// INIT
+initEMI();
